@@ -1,9 +1,11 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
-
+using Entities.DTO_s;
 
 namespace Business.Concrete
 {
@@ -55,6 +57,10 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Product>>(_productDal.GetAll(p => p.CategoryId == id));
         }
 
+        public IDataResult<List<Product>> GetAllCategoryId(int id)
+        {
+            throw new NotImplementedException();
+        }
 
         public IDataResult<Product> GetById(int productId)
         {
@@ -73,6 +79,11 @@ namespace Business.Concrete
         {
 
             return new SuccessDataResult<List<ProductDetailDto>>(_productDal.GetProductDetails());
+        }
+
+        IDataResult<List<ProductDetailDto>> IProductService.GetProductDetails()
+        {
+            throw new NotImplementedException();
         }
     }
 }
