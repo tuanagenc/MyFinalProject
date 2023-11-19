@@ -1,5 +1,5 @@
 ﻿using Core.Entities;
-
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,23 +15,21 @@ namespace Core.DataAccess.EntityFramework
     {
         public void Add(TEntity entity)
         {
-
-            using (TContext context = new())
+            using (TContext context = new TContext())
             {
-                var addedEntity = context.Entry(entity);
-                addedEntity.State = EntityState.Added;
+                var addedContext = context.Entry(entity);
+                addedContext.State = EntityState.Added;
                 context.SaveChanges();
-
             }
         }
+
         public void Delete(TEntity entity)
         {
-            using (TContext context = new())
+            using (TContext context = new TContext())
             {
-                var deletedEntity = context.Entry(entity);
-                deletedEntity.State = EntityState.Deleted;
+                var deletedContext = context.Entry(entity);
+                deletedContext.State = EntityState.Deleted;
                 context.SaveChanges();
-
             }
         }
 
@@ -45,10 +43,8 @@ namespace Core.DataAccess.EntityFramework
 
         public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
         {
-
             using (TContext context = new TContext())
             {
-
                 return filter == null
                     ? context.Set<TEntity>().ToList()
                     : context.Set<TEntity>().Where(filter).ToList();
@@ -57,18 +53,11 @@ namespace Core.DataAccess.EntityFramework
 
         public void Update(TEntity entity)
         {
-
             using (TContext context = new TContext())
             {
-
-                var updatedEntity = context.Entry(entity);
-
-
-                updatedEntity.State = EntityState.Modified;
-
+                var updatedContext = context.Entry(entity);
+                updatedContext.State = EntityState.Modified;
                 context.SaveChanges();
             }
         }
-
     }
-}

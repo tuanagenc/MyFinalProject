@@ -1,51 +1,43 @@
 ﻿using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
-using DataAccess.Concrete.InMemory;
-using Entities.Concrete;
-using System;
 
-internal class Program
+namespace ConsoleUI
 {
-    static void Main(string[] args)
+    internal class Program
     {
-
-        CategoryTest();
-    }
-
-    private static void CategoryTest()
-    {
-
-        CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
-
-
-        foreach (var category in categoryManager.GetAll())
+        static void Main(string[] args)
         {
-            Console.WriteLine(category.CategoryName);
+            ProductTest();
+
         }
-    }
 
-    private static void ProductTest()
-    {
-
-        ProductManager productManager = new ProductManager(new EfProductDal());
-
-
-        var result = productManager.GetProductDetails();
-
-
-        if (result.Success == true)
+        private static void CategoryTest()
         {
-
-            foreach (var product in result.Data)
+            CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
+            foreach (var category in categoryManager.GetAll())
             {
-                Console.WriteLine(product.ProductName + "/" + product.CategoryName);
+                Console.WriteLine(category.CategoryName);
             }
         }
 
-        else
+        private static void ProductTest()
         {
+            ProductManager productManager = new ProductManager(new EfProductDal());
 
-            Console.WriteLine(result.Message);
+            var result = productManager.GetProductDetails();
+            if (result.Success == true)
+            {
+                foreach (var product in result.Data)
+                {
+                    Console.WriteLine(product.ProductName + "/" + product.ProductName);
+                }
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+
+
         }
     }
 }

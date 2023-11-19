@@ -1,15 +1,14 @@
-﻿using System;
+﻿using Core.DataAccess;
+using Entities.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Entities.Concrete;
 
 namespace DataAccess.Abstract
 {
-    public interface ICategoryDal : IEntityRepository<Category>
+    public interface ICategoryDal : IOrderDal<Category>
     {
-        Category Get(Func<object, bool> value);
-        List<Category> GetAll();
     }
 }

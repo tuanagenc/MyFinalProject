@@ -7,7 +7,6 @@ using Entities.Concrete;
 
 namespace Business.Concrete
 {
-    // Ürün işlemlerini gerçekleştiren ProductManager sınıfı
     public class ProductManager : IProductService
     {
 
@@ -19,10 +18,10 @@ namespace Business.Concrete
             _productDal = productDal;
         }
 
-        // Ürün ekleme işlemi için
+
         public IResult Add(Product product)
         {
-            // İş kuralları kontrol edilir
+
             if (product.ProductName.Length < 2)
             {
 
